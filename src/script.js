@@ -15,53 +15,71 @@ let randNum = Math.trunc(Math.random() * 20 + 1);
 let score = 20;
 let highScore = 0;
 
+const displayMessage = function (message) {
+  document.querySelector(".message").textContent = message;
+};
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
   console.log(guess);
 
   // não tem imput do jogador
   if (!guess) {
-    document.querySelector(".message").textContent = "⛔ No number!";
-
+    // document.querySelector(".message").textContent = "⛔ No number!";
+    displayMessage("⛔ No number!");
     // quando o player ganha
   } else if (guess === randNum) {
-    document.querySelector(".message").textContent = "Correct number 🎉";
+    // document.querySelector(".message").textContent = "Correct number 🎉";
+    displayMessage("Correct number 🎉");
     document.querySelector(".number").textContent = randNum;
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
 
     if (score > highScore) {
       highScore = score;
-      document.querySelector('.highscore').textContent = highScore
-    }
-
-    // lógica caso o player dar input de um número maior
-  } else if (guess > randNum) {
-    if (score > 1) {
-      document.querySelector(".message").textContent = "Too high 📈";
-      score--;
-      document.querySelector(".score").textContent = score;
-    } else {
-      document.querySelector(".message").textContent = "You lost the game! 😢";
-      document.querySelector(".score").textContent = 0;
-    }
-    // lógica caso o player de input de um númeor menor
-  } else if (guess < randNum) {
-    if (score > 1) {
-      document.querySelector(".message").textContent = "Too low 📉";
-      score--;
-      document.querySelector(".score").textContent = score;
-    } else {
-      document.querySelector(".message").textContent = "You lost the game! 😢";
-      document.querySelector(".score").textContent = 0;
+      document.querySelector(".highscore").textContent = highScore;
+    } else if (guess !== randNum) {
+      if (score > 1) {
+        // document.querySelector(".message").textContent =
+        //   guess > randNum ? "Too high 📈" : "Too low 📉";
+        displayMessage(guess > randNum ? "Too high 📈" : "Too low 📉");
+        score--;
+        document.querySelector(".score").textContent = score;
+      } else {
+        // document.querySelector(".message").textContent =
+        //   "You lost the game! 😢";
+        displayMessage("You lost the game! 😢");
+        document.querySelector(".score").textContent = 0;
+      }
     }
   }
+  // lógica caso o player dar input de um número maior
+  // } else if (guess > randNum) {
+  //   if (score > 1) {
+  //     document.querySelector(".message").textContent = "Too high 📈";
+  //     score--;
+  //     document.querySelector(".score").textContent = score;
+  //   } else {
+  //     document.querySelector(".message").textContent = "You lost the game! 😢";
+  //     document.querySelector(".score").textContent = 0;
+  //   }
+  //   // lógica caso o player de input de um númeor menor
+  // } else if (guess < randNum) {
+  //   if (score > 1) {
+  //     document.querySelector(".message").textContent = "Too low 📉";
+  //     score--;
+  //     document.querySelector(".score").textContent = score;
+  //   } else {
+  //     document.querySelector(".message").textContent = "You lost the game! 😢";
+  //     document.querySelector(".score").textContent = 0;
+  //   }
+  // }
 });
 
 document.querySelector(".again").addEventListener("click", function () {
   score = 20;
   randNum = Math.trunc(Math.random() * 20 + 1);
-  document.querySelector(".message").textContent = "Start guessing...";
+  // document.querySelector(".message").textContent = "Start guessing...";
+  displayMessage("Start guessing...");
   document.querySelector(".score").textContent = score;
   document.querySelector(".number").textContent = "?";
   document.querySelector(".guess").value = "";
