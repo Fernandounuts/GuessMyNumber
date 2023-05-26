@@ -1,4 +1,4 @@
-"using strict";
+"use strict";
 /*
 document.querySelector(".message").textContent = "Correct number 🎉";
 document.querySelector(".number").textContent = 13;
