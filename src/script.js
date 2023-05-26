@@ -11,7 +11,7 @@ console.log(document.querySelector(".guess").value = 23);
 
 */
 
-let randNum = Math.trunc(Math.random() * 20 + 1);
+let randNum = Math.trunc(Math.trunc(Math.random() * 20) + 1);
 let score = 20;
 let highScore = 0;
 
@@ -37,42 +37,17 @@ document.querySelector(".check").addEventListener("click", function () {
     if (score > highScore) {
       highScore = score;
       document.querySelector(".highscore").textContent = highScore;
-    } else if (guess !== randNum) {
-      if (score > 1) {
-        // document.querySelector(".message").textContent =
-        //   guess > randNum ? "Too high 📈" : "Too low 📉";
-        displayMessage(guess > randNum ? "Too high 📈" : "Too low 📉");
-        score--;
-        document.querySelector(".score").textContent = score;
-      } else {
-        // document.querySelector(".message").textContent =
-        //   "You lost the game! 😢";
-        displayMessage("You lost the game! 😢");
-        document.querySelector(".score").textContent = 0;
-      }
     }
+  } else if (guess !== randNum) {
+    if (score > 1) {
+      displayMessage(guess > randNum ? "📈 Too high!" : "📉 Too low!");
+      score--;
+      document.querySelector(".score").textContent = score;
+    }
+  } else {
+    displayMessage("You lost the game! 😢");
+    document.querySelector(".score").textContent = 0;
   }
-  // lógica caso o player dar input de um número maior
-  // } else if (guess > randNum) {
-  //   if (score > 1) {
-  //     document.querySelector(".message").textContent = "Too high 📈";
-  //     score--;
-  //     document.querySelector(".score").textContent = score;
-  //   } else {
-  //     document.querySelector(".message").textContent = "You lost the game! 😢";
-  //     document.querySelector(".score").textContent = 0;
-  //   }
-  //   // lógica caso o player de input de um númeor menor
-  // } else if (guess < randNum) {
-  //   if (score > 1) {
-  //     document.querySelector(".message").textContent = "Too low 📉";
-  //     score--;
-  //     document.querySelector(".score").textContent = score;
-  //   } else {
-  //     document.querySelector(".message").textContent = "You lost the game! 😢";
-  //     document.querySelector(".score").textContent = 0;
-  //   }
-  // }
 });
 
 document.querySelector(".again").addEventListener("click", function () {
